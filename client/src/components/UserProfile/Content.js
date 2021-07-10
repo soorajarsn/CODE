@@ -52,11 +52,11 @@ const Content = (props) => {
                     </h4>
                     <br />
                     <div className="post">
-                      <h5>
+                      <h4>
                         {props.user.academics &&
                           props.user.academics.length > 0 &&
                           props.user.academics[0].degree}
-                      </h5>
+                      </h4>
                     </div>
                     {/*<p className="etxt">
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit. In
