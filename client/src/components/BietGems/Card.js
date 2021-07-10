@@ -5,7 +5,7 @@ import user_image from "../assets/boy.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-import Pagination from '../Pagination/Pagination';
+import Pagination from "../Pagination/Pagination";
 
 const CardItem = ({ _id, name, branch, facebook, linkedin, github }) => {
   return (
@@ -18,9 +18,9 @@ const CardItem = ({ _id, name, branch, facebook, linkedin, github }) => {
           <div className="name">{name}</div>
           <div className="desc">{branch}</div>
           <div className="sm">
-            <Link to={facebook} className="fab fa-facebook"></Link>
+            {/* <Link to={facebook} className="fab fa-facebook"></Link>
             <Link to={linkedin} className="fab fa-linkedin"></Link>
-            <Link to={github} className="fab fa-github"></Link>
+  <Link to={github} className="fab fa-github"></Link>*/}
           </div>
         </div>
       </div>
@@ -43,16 +43,18 @@ const Card = (props) => {
     window.scrollTo(0, 0);
 
     axios
-      .get(`/api/gems?year=${year}&branch=${branch}&profession=${profession}&page=${currentPage}&size=${limit}`)
+      .get(
+        `/api/gems?year=${year}&branch=${branch}&profession=${profession}&page=${currentPage}&size=${limit}`
+      )
       .then((res) => {
         setUserData(res.data.data);
         console.log(res.data);
-        setTotalItems(res.data.totalItems)
+        setTotalItems(res.data.totalItems);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [currentPage,year, branch,profession]);
+  }, [currentPage, year, branch, profession]);
 
   const handlePageChange = (page) => {
     console.log(page);
