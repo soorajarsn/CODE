@@ -308,25 +308,32 @@ const Content = (props) => {
                   </div>
                 )}
                 {/* Awards */}
-                {props.user.achievements && props.user.achievements.length > 0 && (
-                  <div className="common awards">
-                    <div className="mainHeading">
-                      <h1>
-                        {" "}
-                        <i className="fas icon trophy fa-trophy"></i>
-                        Awards
-                      </h1>
+                {props.user.achievements &&
+                  props.user.achievements.length > 0 &&
+                  props.user.achievements[0].length > 0 && (
+                    <div className="common awards">
+                      <div className="mainHeading">
+                        <h1>
+                          {" "}
+                          <i className="fas icon trophy fa-trophy"></i>
+                          Awards
+                        </h1>
+                      </div>
+
+                      <hr />
+
+                      <ul className="rewardList">
+                        {props.user.achievements &&
+                          props.user.achievements.length > 0 &&
+                          props.user.achievements.map((da) => {
+                            console.log(da.length);
+                            if (da.length > 0) {
+                              return <li>{da}</li>;
+                            }
+                          })}
+                      </ul>
                     </div>
-
-                    <hr />
-
-                    <ul className="rewardList">
-                      {props.user.achievements &&
-                        props.user.achievements.length > 0 &&
-                        props.user.achievements.map((da) => <li>{da}</li>)}
-                    </ul>
-                  </div>
-                )}
+                  )}
               </div>
             )}
         </div>
