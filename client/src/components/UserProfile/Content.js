@@ -1,9 +1,6 @@
 import React, { useEffect } from "react";
 
 const Content = (props) => {
-  console.log(props);
-  console.log(props.user);
-
   return (
     <div className="content-container">
       <div className="ll">

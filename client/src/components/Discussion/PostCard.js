@@ -1,11 +1,13 @@
-import React, { useState, useContext } from "react";
-import ReplyCard from "./ReplyCard";
-import ReplyModal from "./ReplyModal";
+import React, { useState, useContext, lazy } from "react";
 import noUserImg from "../assets/user.svg";
 import axios from "axios";
 import { InfoContext, AuthContext } from "../../state/Store";
 import { generateError } from "../../state/info/infoActions";
 import { Redirect, useLocation } from "react-router-dom";
+// import ReplyCard from "./ReplyCard";
+// import ReplyModal from "./ReplyModal";
+const ReplyCard = lazy(() => import("./ReplyCard"));
+const ReplyModal = lazy(() => import("./ReplyModal"));
 const PostCard = ({ post = {}, setPosts = () => "", getQuery = () => "" }) => {
   const [replyModalOpen, setReplyModalOpen] = useState(false);
   const [redirect, setRedirect] = useState(false);
@@ -14,6 +16,7 @@ const PostCard = ({ post = {}, setPosts = () => "", getQuery = () => "" }) => {
   const auth = useContext(AuthContext);
   //toggle reply modal on clicking reply button;
   const toggleReplyModalOpen = () => {
+    if (!auth.state.userLoggedIn) return setRedirect(true);
     setReplyModalOpen((prev) => !prev);
   };
   const changeLike = () => {
@@ -72,8 +75,8 @@ const PostCard = ({ post = {}, setPosts = () => "", getQuery = () => "" }) => {
                 <h2>{post.queryTitle}</h2>
                 <p style={{ textAlign: "justify" }}>{post.queryDescription}</p>
                 <div className="tagContainer mt-20">
-                  {post.tags.map((tag) => (
-                    <a href="#" className="tag color1">
+                  {post.tags.map((tag, index) => (
+                    <a key={index} href="#" className="tag color1">
                       {tag}
                     </a>
                   ))}
@@ -95,28 +98,31 @@ const PostCard = ({ post = {}, setPosts = () => "", getQuery = () => "" }) => {
                     <span className="align-middle">{post.likes}</span>
                   </a>
                 </div>
-                {post.replies.length == 0 && ( //for now, in this version, only one reply per question can be added
-                  <>
-                    <div className="px-4 pt-3">
-                      <button
-                        type="button"
-                        className="btn btn-primary"
-                        onClick={() => toggleReplyModalOpen((prev) => !prev)}
-                      >
-                        <i className="fa fa-pencil"></i>&nbsp; Reply
-                      </button>
-                    </div>
-                    <ReplyModal
-                      replyModalOpen={replyModalOpen}
-                      toggleReplyModalOpen={toggleReplyModalOpen}
-                      setPosts={setPosts}
-                      getQuery={getQuery}
-                      doubtId={post._id}
-                    />
-                  </>
-                )}
+                <div className="px-4 pt-3">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={() => toggleReplyModalOpen((prev) => !prev)}
+                  >
+                    <i className="fa fa-pencil"></i>&nbsp; Reply
+                  </button>
+                </div>
+                <ReplyModal
+                  replyModalOpen={replyModalOpen}
+                  toggleReplyModalOpen={toggleReplyModalOpen}
+                  setPosts={setPosts}
+                  getQuery={getQuery}
+                  doubtId={post._id}
+                />
               </div>
-              {post.replies.length > 0 && <ReplyCard reply={post.replies[0]} />}
+              {post.replies.length > 0 && <hr />}
+              {post.replies.length > 0 &&
+                post.replies.map((reply, index) => (
+                  <>
+                    <ReplyCard key={reply._id} reply={reply} />
+                    {post.replies.length > index + 1 && <hr />}
+                  </>
+                ))}
             </div>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 const months = [
   "JAN",
@@ -37,12 +38,16 @@ const EventCard = ({
         <div className="card">
           <div className="cardHeader">
             <div className="cardHeaderInner">
-              <img src={cardImg} alt="cardimage" className="cardImage"></img>
+              <LazyLoadImage
+                src={cardImg}
+                alt="cardimage"
+                className="cardImage"
+              />
             </div>
           </div>
 
           <div className="cardMain">
-            <p>{name}</p>
+            <p className="event-title">{name}</p>
             <div className="eventDetails">
               <div className="eventInfo">
                 <p className="eventInfo-header">
@@ -89,9 +94,12 @@ const EventCard = ({
             </div>
             <div className="shortDescription">{shortDescription}</div>
             <div className="tagsContainer">
-              {tags.map((tag) => (
-                <div className="tags">{tag}</div>
-              ))}
+              {tags &&
+                tags.map((tag) => (
+                  <div key={tag} className="tags">
+                    {tag}
+                  </div>
+                ))}
             </div>
           </div>
         </div>

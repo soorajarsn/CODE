@@ -9,7 +9,6 @@ import {
   NavItem,
   Container,
 } from "reactstrap";
-import logo from "../../assets/logo_nobg.png";
 
 function Header(props) {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -71,7 +70,11 @@ function Header(props) {
             </button>
           </div>
           <NavbarBrand href="/">
-            <img src={logo} alt="" width="50px" />
+            <img
+              src="https://club-of-developers.s3.ap-south-1.amazonaws.com/codeLogo.png"
+              alt=""
+              width="50px"
+            />
           </NavbarBrand>
           <NavItem
             className="pr-3 font-weight-bold"
@@ -140,6 +143,30 @@ function Header(props) {
                 }}
               >
                 Blogs
+              </Link>
+            </NavItem>
+            <NavItem className="pr-3">
+              <Link
+                to="/admin/career"
+                style={{
+                  color: "#111",
+                  fontWeight: 600,
+                  textDecoration: "none",
+                }}
+              >
+                Careers
+              </Link>
+            </NavItem>
+            <NavItem className="pr-3">
+              <Link
+                to="/admin/feedbacks"
+                style={{
+                  color: "#111",
+                  fontWeight: 600,
+                  textDecoration: "none",
+                }}
+              >
+                Feedbacks
               </Link>
             </NavItem>
             <NavItem className="pr-3">

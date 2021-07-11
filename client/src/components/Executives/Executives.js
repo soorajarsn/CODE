@@ -40,10 +40,11 @@ function Executives() {
         Our <span className="Headingspan">Executives</span>
       </h1>
       <p exe_tag>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis ex
-        mol
+        To provide strategic and operational leadership to the organisation, the Club
+        of DEvelopers has an amazing team of Executives. This team sets goals,
+        develops strategies, and ensures its proper execution.
       </p>
-      <div class="executives">
+      <div className="executives">
         <ExecutiveItem
           src={Manal}
           name="Manal Jain"

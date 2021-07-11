@@ -80,21 +80,21 @@ function Contact() {
               <i className="fas fa-globe icon"></i>
               <div className="Address-Content">
                 <h4>Permanent Address</h4>
-                <p>KochaBhawar BIET,Jhansi</p>
+                <p>BIET , Jhansi, UP</p>
               </div>
             </div>
             <div className="codeAddress">
               <i className="fas fa-phone icon"></i>
               <div className="Address-Content">
                 <h4>Call us</h4>
-                <p>9811818802 , 0554-88885455</p>
+                <p>7985420579,9520437027<br></br>9452926700</p>
               </div>
             </div>
             <div className="codeAddress">
               <i className="fas fa-envelope-open icon"></i>
               <div className="Address-Content">
                 <h4>Mail us</h4>
-                <p>gauti@123unplaced.com</p>
+                <p>codebiet@gmail.com</p>
               </div>
             </div>
           </div>
@@ -134,7 +134,7 @@ function Contact() {
         <br></br>
         <p className="Infotext">
           Don't worry, no spam here! Your information will only be used for
-          C.O.D.E and Chrome related updates<br></br> and our emails are
+          CODE and Chrome related updates<br></br> and our emails are
           typically no more than 1-2 times a month. You can unsubscribe anytime.
         </p>
         <br></br>

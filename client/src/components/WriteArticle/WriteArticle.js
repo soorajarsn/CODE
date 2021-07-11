@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
-import Loader from "../Loader/Loader";
+import React, { useState, useEffect, useContext, lazy } from "react";
 import { AuthContext } from "../../state/Store";
-import Editor from "../Editor/Editor";
 import { Container, Button } from "reactstrap";
 import { EditorState, convertToRaw, convertFromRaw } from "draft-js";
 import { Redirect } from "react-router-dom";
-import Nav from "../Navbar/Nav";
-import Footer from "../Footer/Footer";
 import axios from "axios";
+import Loader from "../Loader/Loader";
+// import Editor from "../Editor/Editor";
+const Editor = lazy(() => import("../Editor/Editor"));
 export default (props) => {
   const auth = useContext(AuthContext);
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
@@ -32,7 +31,7 @@ export default (props) => {
           );
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   }, []);
   const getContent = () => {
@@ -71,7 +70,6 @@ export default (props) => {
     <>
       {auth.state.userLoggedIn && (
         <>
-          <Nav />
           <Container
             style={{ margin: "4rem auto" }}
             className="write-article-container"
@@ -81,13 +79,12 @@ export default (props) => {
             </h2>
             <Editor editorState={editorState} setEditorState={setEditorState} />
             <div className="button-container">
-              <Button onClick={(e) => submitForReview(e)} className="default-btn">
+              <Button onClick={(e) => submitForReview(e)}>
                 Submit for Review
               </Button>
               <Button onClick={(e) => saveAsDraft(e)}>Save As Draft</Button>
             </div>
           </Container>
-          <Footer />
         </>
       )}
       {!auth.state.userLoggedIn && (

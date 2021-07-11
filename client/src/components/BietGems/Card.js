@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
-
-import FilterForm from "./FilterForm";
+import React, { useState, useEffect, lazy } from "react";
 import user_image from "../assets/boy.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
 import Pagination from "../Pagination/Pagination";
+// import Pagination from "../Pagination/Pagination";
+// import FilterForm from "./FilterForm";
+import Loader from "../Loader/Loader";
+const Pagination = lazy(() => import("../Pagination/Pagination"));
+const FilterForm = lazy(() => import("./FilterForm"));
 
 const CardItem = ({
   _id,
@@ -41,27 +44,26 @@ const Card = (props) => {
   const [year, setYear] = useState("");
   const [branch, setBranch] = useState("");
   const [profession, setProfession] = useState("");
-
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalItems, setTotalItems] = useState(6);
-  const [limit, setLimit] = useState(6);
-  // const [status, setStatus] = useState("")
+  const [totalItems, setTotalItems] = useState(19);
+  const [limit, setLimit] = useState(20);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // setLoading(true);
     window.scrollTo(0, 0);
-
+    setLoading(true);
     axios
       .get(
         `/api/gems?year=${year}&branch=${branch}&profession=${profession}&page=${currentPage}&size=${limit}`
       )
       .then((res) => {
+        setLoading(false);
         setUserData(res.data.data);
-        console.log(res.data);
         setTotalItems(res.data.totalItems);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
+        setLoading(false);
       });
   }, [currentPage, year, branch, profession]);
 
@@ -71,7 +73,7 @@ const Card = (props) => {
   };
 
   return (
-    <div className="card_main_cot">
+    <div className="card_main_cot" style={{ marginBottom: "3rem" }}>
       <FilterForm
         year={year}
         setYear={setYear}
@@ -94,6 +96,7 @@ const Card = (props) => {
           handlePageChange={handlePageChange}
         />
       )}
+      {loading && <Loader />}
     </div>
   );
 };

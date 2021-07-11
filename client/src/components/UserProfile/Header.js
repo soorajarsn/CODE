@@ -31,6 +31,14 @@ const Header = (props) => {
                     alt=""
                   />
                 )}
+                <img
+                  src={props.user.profilePhoto}
+                  className="head_image"
+                  width="140px"
+                  height="150px"
+                  alt=""
+                  style={{ maxWidth: "unset" }}
+                />
               </div>
             </div>
           </div>

@@ -41,6 +41,12 @@ router
     authAdminOrUser,
     require("../controllers/patchControllers/likeDoubtPost")
   );
+router
+  .route("/projects/:id/rateProject")
+  .patch(
+    authAdminOrUser,
+    require("../controllers/patchControllers/rateProject")
+  );
 //--------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------
 //-------------------------------------admin routes-------------------------------------------
@@ -79,4 +85,7 @@ router
     authAdmin,
     require("../controllers/patchControllers/admin/discardBlog")
   );
+router
+  .route("/job/:id")
+  .patch(require("../controllers/patchControllers/admin/job"));
 module.exports = router;

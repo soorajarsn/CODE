@@ -1,9 +1,6 @@
-import React, { useEffect, useState, useContext } from "react";
-import eventRoutes from "./eventRoutes";
-import DashboardLayout from "../Dashboard/DashboardLayout";
+import React, { useEffect, useState, useContext, lazy } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import ContentLoaderSvg from "../../EventCard/EventCardLoader";
 import {
   Row,
   Col,
@@ -14,7 +11,6 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
-import EventCard from "../../EventCard/EventCard";
 import {
   DeleteForeverRounded,
   EditTwoTone,
@@ -25,8 +21,17 @@ import {
   generateSuccess,
   generateError,
 } from "../../../state/info/infoActions";
-import Pagination from "../../Pagination/Pagination";
-import ConfirmDeletion from "./ConfirmDeletion";
+// import EventCard from "../../EventCard/EventCard";
+// import DashboardLayout from "../Dashboard/DashboardLayout";
+// import ContentLoaderSvg from "../../EventCard/EventCardLoader";
+// import Pagination from "../../Pagination/Pagination";
+// import ConfirmDeletion from "./ConfirmDeletion";
+import eventRoutes from "./eventRoutes";
+const DashboardLayout = lazy(() => import("../Dashboard/DashboardLayout"));
+const EventCard = lazy(() => import("../../EventCard/EventCard"));
+const ContentLoaderSvg = lazy(() => import("../../EventCard/EventCardLoader"));
+const Pagination = lazy(() => import("../../Pagination/Pagination"));
+const ConfirmDeletion = lazy(() => import("./ConfirmDeletion"));
 const FilterComponent = ({ filter, setFilter, setPage }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const changeFilter = (newFilter) => {
@@ -132,7 +137,7 @@ const Events = () => {
     setLoading(true);
     //scroll to top when mounted;
     const queryString = getFilters(filter);
-    console.log(queryString);
+    // console.log(queryString);
     window.scrollTo(0, 0);
     axios
       .get(`/api/events/?limit=${limit}&page=${currentPage - 1}&${queryString}`)
@@ -142,7 +147,7 @@ const Events = () => {
         setEvents(res.data.events);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   }, [currentPage, filter]);
 
@@ -152,7 +157,7 @@ const Events = () => {
     axios
       .delete(`/delete/event/${id}`)
       .then((res) => {
-        console.log(res.data.events);
+        // console.log(res.data.events);
         setLoading(false);
         setEvents(res.data.events);
         info.dispatch(generateSuccess("Delete Successfully!"));
@@ -167,7 +172,7 @@ const Events = () => {
       });
   };
   const handlePageChange = (page) => {
-    console.log(page);
+    // console.log(page);
     setCurrentPage(page);
   };
   const changeEventIdToBeDeleted = (id) => {

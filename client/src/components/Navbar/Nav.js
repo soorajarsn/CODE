@@ -46,7 +46,7 @@ function Nav() {
         </label>
         <input type="checkbox" name="" id="toggle" />
         {/* <!-- navigation menu --> */}
-        <div id="menu" className={isOpen && "menu-open"}>
+        <div id="menu" className={isOpen ? "menu-open" : ""}>
           <ul className="nav">
             <li>
               <NavLink to="/">Home</NavLink>
@@ -56,10 +56,13 @@ function Nav() {
               ref={resourcesRef}
               onTouchStart={(e) => touchHandler(e, resourcesRef, actionsRef)}
             >
-              <NavLink to="#">
+              <button>
                 Resources{" "}
-                <img src="https://img.icons8.com/metro/26/000000/sort-down.png" />
-              </NavLink>
+                <img
+                  src="https://img.icons8.com/metro/26/000000/sort-down.png"
+                  alt=""
+                />
+              </button>
               <div className="expand">
                 <div className="nav-column">
                   <ul>
@@ -68,6 +71,7 @@ function Nav() {
                         <img
                           src="https://img.icons8.com/metro/26/000000/sort-down.png"
                           className="elevated"
+                          alt=""
                         />{" "}
                         Blogs
                       </NavLink>
@@ -77,6 +81,7 @@ function Nav() {
                         <img
                           src="https://img.icons8.com/metro/26/000000/sort-down.png"
                           className="elevated"
+                          alt=""
                         />{" "}
                         Our Team
                       </NavLink>
@@ -86,6 +91,7 @@ function Nav() {
                         <img
                           src="https://img.icons8.com/metro/26/000000/sort-down.png"
                           className="elevated"
+                          alt=""
                         />{" "}
                         Events
                       </NavLink>
@@ -95,8 +101,19 @@ function Nav() {
                         <img
                           src="https://img.icons8.com/metro/26/000000/sort-down.png"
                           className="elevated"
+                          alt=""
                         />{" "}
                         Projects
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/discussion-forum">
+                        <img
+                          src="https://img.icons8.com/metro/26/000000/sort-down.png"
+                          className="elevated"
+                          alt=""
+                        />{" "}
+                        Discussion-forum
                       </NavLink>
                     </li>
                     {/* <li>
@@ -126,18 +143,32 @@ function Nav() {
               ref={actionsRef}
               onTouchStart={(e) => touchHandler(e, actionsRef, resourcesRef)}
             >
-              <NavLink to="#">
+              <button>
                 Actions{" "}
-                <img src="https://img.icons8.com/metro/26/000000/sort-down.png" />
-              </NavLink>
+                <img
+                  src="https://img.icons8.com/metro/26/000000/sort-down.png"
+                  alt=""
+                />
+              </button>
               <div className="expand">
                 <div className="nav-column">
                   <ul>
+                    <li>
+                      <NavLink to="/suggestions">
+                        <img
+                          src="https://img.icons8.com/metro/26/000000/sort-down.png"
+                          className="elevated"
+                          alt=""
+                        />{" "}
+                        Write a Blog
+                      </NavLink>
+                    </li>
                     <li>
                       <NavLink to="/careers">
                         <img
                           src="https://img.icons8.com/metro/26/000000/sort-down.png"
                           className="elevated"
+                          alt=""
                         />{" "}
                         Work with Us
                       </NavLink>
@@ -147,17 +178,9 @@ function Nav() {
                         <img
                           src="https://img.icons8.com/metro/26/000000/sort-down.png"
                           className="elevated"
+                          alt=""
                         />{" "}
                         Give Suggestions
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink to="/about">
-                        <img
-                          src="https://img.icons8.com/metro/26/000000/sort-down.png"
-                          className="elevated"
-                        />{" "}
-                        About Us
                       </NavLink>
                     </li>
                     <li>
@@ -165,6 +188,7 @@ function Nav() {
                         <img
                           src="https://img.icons8.com/metro/26/000000/sort-down.png"
                           className="elevated"
+                          alt=""
                         />{" "}
                         Certificate Verification
                       </NavLink>
@@ -174,6 +198,7 @@ function Nav() {
                         <img
                           src="https://img.icons8.com/metro/26/000000/sort-down.png"
                           className="elevated"
+                          alt=""
                         />{" "}
                         Report a Bug ?
                       </NavLink>
@@ -183,6 +208,12 @@ function Nav() {
               </div>
             </li>
             <li>
+              <NavLink to="/about">About Us</NavLink>
+            </li>
+            <li>
+              <NavLink to="/bietGems">BIET Gems</NavLink>
+            </li>
+            <li style={{ marginRight: "1rem" }}>
               <NavLink to="/contact">Contact Us</NavLink>
             </li>
           </ul>
@@ -197,7 +228,7 @@ function Nav() {
                   Login
                 </NavLink>
               </li>
-              <li>
+              <li style={{ marginRight: "2rem" }}>
                 <NavLink
                   to="/register"
                   className="cta cta-2 default-btn round-corner"
@@ -209,7 +240,11 @@ function Nav() {
             </ul>
           )}
           {auth.state.userLoggedIn && (
-            <NavLink to="/dashboard" className="nav-user-container">
+            <NavLink
+              to="/dashboard"
+              className="nav-user-container"
+              style={{ marginRight: "1rem" }}
+            >
               <img className="avtar-img" src={auth.state.profileImg} alt="" />
               <span>{auth.state.userName}</span>
             </NavLink>

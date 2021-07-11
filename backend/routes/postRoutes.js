@@ -40,6 +40,12 @@ router
   .route("/event/:id/register")
   .post(require("../controllers/postControllers/eventRegistration"));
 router
+  .route("/job/:id/register")
+  .post(
+    authAdminOrUser,
+    require("../controllers/postControllers/jobRegistration")
+  );
+router
   .route("/blogs/addSuggestion")
   .post(
     authAdminOrUser,
@@ -74,4 +80,7 @@ router
 router
   .route("/admin/addproject")
   .post(require("../controllers/postControllers/addProject"));
+router
+  .route("/admin/addjob")
+  .post(require("../controllers/postControllers/admin/addJobs"));
 module.exports = router;

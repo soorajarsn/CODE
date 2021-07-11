@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
-import Comment from "./Comment";
-import axios from "axios";
-import Loader from "../Loader/Loader";
-import draftToHtml from "draftjs-to-html";
+import React, { useState, useEffect, lazy } from "react";
 import DOMPurify from "dompurify";
-import Card from "./Card";
+import axios from "axios";
+import draftToHtml from "draftjs-to-html";
 import { Link } from "react-router-dom";
+// import Card from "./Card";
+import Loader from "../Loader/Loader";
+// import Comment from "./Comment";
+const Card = lazy(() => import("./Card"));
+// const Loader = lazy(() => import("../Loader/Loader"));
+const Comment = lazy(() => import("./Comment"));
 const Main = (props) => {
   const [blog, setBlog] = useState({});
   const [prevBlog, setPrevBlog] = useState({});
@@ -40,14 +43,14 @@ const Main = (props) => {
   }, [props.match.params.url]);
   return (
     <main className="blogs-individual-container-main">
-      <div className="ll" style={{maxWidth:"100vw"}}>
+      <div className="ll" style={{ maxWidth: "100vw" }}>
         <div className=" l container">
           <div className="blogs-and-resent-blogs-container">
             <div className="main_container">
               <div className="content">
                 <header className="header1 header2">
                   <aside className="cat_position cat_info">
-                    <Link class="catagory" to="#">
+                    <Link className="catagory" to="#">
                       {blog.category}
                     </Link>
                   </aside>
@@ -66,7 +69,7 @@ const Main = (props) => {
                   <div className="l">
                     <img src={blog.cardImg}></img>
                   </div>
-                  <span class="image_caption overlay">
+                  <span className="image_caption overlay">
                     Code gives you wings
                   </span>
                 </div> */}
@@ -159,7 +162,7 @@ const Main = (props) => {
               {recentBlogs.length > 0 && (
                 <div className="widget">
                   <h2 className="recent_widget recent_post">Recent Post</h2>
-                  <ul>
+                  <ul className="recent-blogs" style={{marginLeft:"0"}}>
                     {recentBlogs &&
                       recentBlogs.map((blog) => {
                         return (

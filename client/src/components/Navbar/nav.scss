@@ -107,7 +107,9 @@
   }
 
   /* Menu Links */
-  .nav > li > a {
+  .nav > li > a,
+  .nav > li > button {
+    border: none;
     position: relative;
     display: block;
     z-index: 510;
@@ -115,7 +117,7 @@
     padding: 0 15px;
     line-height: 40px;
     border-radius: 10px;
-
+    background-color: transparent;
     font-family: "Poppins", Helvetica, Arial, sans-serif;
     font-weight: 600;
     font-size: 15px;
@@ -130,7 +132,8 @@
     transition: all 0.3s ease;
   }
 
-  .nav > li > a > img {
+  .nav > li > a > img,
+  .nav > li > button > img {
     display: inline-block;
     height: 10px;
     padding: 0px 5px;
@@ -142,7 +145,8 @@
   }
 
   /* Menu Dropdown */
-  @media (min-width: 951px) {
+  @media (min-width: 1100px) {
+    .nav > li:hover > button,
     .nav > li:hover > a {
       color: #000;
       background: linear-gradient(45deg, #fbbb3b, #ec8c24, #ec7c2d, #e45c2c);
@@ -252,7 +256,7 @@
   }
 
   /* responsive design */
-  @media screen and (max-width: 950px) {
+  @media screen and (max-width: 1099px) {
     nav #logo > img {
       width: 80px;
     }
@@ -294,7 +298,7 @@
             }
           }
         }
-        &.hovered > a {
+        &:hover > button {
           background: linear-gradient(
             45deg,
             #fbbb3b,
@@ -306,7 +310,7 @@
           border-radius: 10px;
           transition: 0.4s ease-in;
         }
-        &.hovered {
+        &:hover {
           .expand {
             max-height: 300px;
             transition: max-height 0.3s ease-in-out;

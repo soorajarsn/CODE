@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import undraw_Code_thinking_re_gka2 from "../assets/undraw_Code_thinking_re_gka2.svg";
 import AOS from "aos";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 const toBeTyped = [
   "L",
   "Le",
@@ -124,8 +124,8 @@ const Hero = (props) => {
             <div className="col-lg-5 col-md-6 pt-md-0 pt-4">
               <h2 id="typewriter">{typed.text.trim()}</h2>
               <p>
-                Club of Developers is an initiative of The Department of
-                Computer Science & Engineering, BIET Jhansi. CODE aims to
+                Club Of DEvelopers is an initiative of the students of 
+                Computer Science & Engineering department, BIET Jhansi. CODE aims to
                 establish a coding culture on campus, reaching every student
                 passionate about development. The club's motto is to
                 Learn-Build-Innovate. CODE is for everyone, regardless of their
@@ -133,20 +133,21 @@ const Hero = (props) => {
               </p>
               <div className="mt-md-5 mb-lg-0">
                 <a
-                  className="btn btn-style"
+                  className="btn btn-style default-btn"
                   href="https://drive.google.com/file/d/1nD_OfSQ70HxRf7SJKShOHcuiLiCX1rmd/view?usp=sharing"
                   style={{ fontWeight: 700, textTransform: "capitalize" }}
                   target="_blank"
+                  rel="noopener"
                 >
                   View our Works
                 </a>
               </div>
             </div>
             <div className="col-md-6 banner-right mt-lg-4 mt-0 text-right offset-lg-1">
-              <img
+              <LazyLoadImage
                 className="img-fluid"
                 src={undraw_Code_thinking_re_gka2}
-                alt=" "
+                alt=""
               />
             </div>
           </div>

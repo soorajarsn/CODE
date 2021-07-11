@@ -58,13 +58,25 @@ router
   .get(require("../controllers/getControllers/comments"));
 router
   .route("/projects")
-  .get(require("../controllers/getControllers/getProjects"));
+  .get(getUserId, require("../controllers/getControllers/getProjects"));
 router
   .route("/doubts")
   .get(getUserId, require("../controllers/getControllers/getDoubts"));
 
 router.route("/gems").get(require("../controllers/getControllers/getGems"));
-router.route("/gems/:id").get(require("../controllers/getControllers/gemsById"));
+router
+  .route("/gems/:id")
+  .get(require("../controllers/getControllers/gemsById"));
+router.route("/jobs").get(require("../controllers/getControllers/getJobs"));
+router
+  .route("/jobs/:id")
+  .get(require("../controllers/getControllers/getJobsbyID"));
+router
+  .route("/jobs/isRegistered/:id")
+  .get(
+    authAdminOrUser,
+    require("../controllers/getControllers/isJobRegistered")
+  );
 //-------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------
 //------------------------------------ADMIN--------------------------------------
@@ -76,4 +88,10 @@ router
 router
   .route("/admin/events/:id/registrations/")
   .get(require("../controllers/getControllers/admin/registrations"));
+router
+  .route("/admin/feedbacks")
+  .get(require("../controllers/getControllers/admin/feedbacks"));
+router
+  .route("/admin/jobs/:id/applications")
+  .get(require("../controllers/getControllers/admin/jobApplications"));
 module.exports = router;

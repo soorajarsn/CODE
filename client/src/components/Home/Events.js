@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, lazy } from "react";
 import AOS from "aos";
-
 import OwlCarousel from "react-owl-carousel";
 import EventCard from "../EventCard/EventCard";
+// const OwlCarousel = lazy(() => import("react-owl-carousel"));
 import EventLoaderCard from "../EventCard/EventCardLoader";
+// const EventCard = lazy(() => import("../EventCard/EventCard"));
+// const EventLoaderCard = lazy(() => import("../EventCard/EventCardLoader"));
 import { Container } from "reactstrap";
 import axios from "axios";
 const Events = (props) => {
@@ -19,11 +21,11 @@ const Events = (props) => {
       .get("/api/events")
       .then((res) => {
         setLoading(false);
-        console.log(res.data.events);
+        // console.log(res.data.events);
         setEventsData(res.data.events);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   }, []);
   return (
@@ -49,9 +51,7 @@ const Events = (props) => {
               </span>
             </h3>
           </div>
-          <Container
-            className="py-md-5 events-container"
-          >
+          <Container className="py-md-5 events-container">
             {eventsData.length && (
               <OwlCarousel
                 items={3}
@@ -65,6 +65,7 @@ const Events = (props) => {
                 }}
                 id="events"
                 className="owl-theme mt-4 py-md-2"
+                lazyLoad={true}
               >
                 {eventsData.map((eventData) => (
                   <EventCard key={eventData._id} {...eventData} />

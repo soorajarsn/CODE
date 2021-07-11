@@ -103,7 +103,7 @@ const YourLife = () => {
             <br />
             <br />
             <div class="join-box">
-              <button type="button" class="btn default-btn round-corner">
+              <button type="button" class="btn">
                 Apply Now
               </button>
             </div>
