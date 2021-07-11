@@ -21,7 +21,8 @@ const CardItem = ({
       <div className="profile-card">
         <div className="card-header">
           <div className="pic">
-            <img src={profilePhoto} alt="" />
+            {profilePhoto && <img src={profilePhoto} alt="" />}
+            {!profilePhoto && <img src={user_image} alt="" />}
           </div>
           <div className="name">{name}</div>
           <div className="desc">{branch}</div>
