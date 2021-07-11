@@ -1,82 +1,47 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import AOS from "aos";
 import { Link } from "react-router-dom";
 import like from "../assets/like.png";
 import user from "../assets/user.png";
 import calendar from "../assets/calendar.png";
-import blogCardImg1 from "../assets/blogCardImg1.jpg";
-import blogCardImg2 from "../assets/blogCardImg2.jpg";
-import blogCardImg3 from "../assets/blogCardImg3.jpg";
-const blogsData = [
-  {
-    writer: "Sooraj",
-    likes: "26",
-    publishedOn: "May-20",
-    path: "#",
-    category: "Web Development",
-    tags: ["Web Development", "React", "React-To-Pdf"],
-    blogImg: blogCardImg1,
-    description: "How to generate pdf of a react component?",
-  },
-  {
-    writer: "Sooraj",
-    likes: "56",
-    publishedOn: "May-25",
-    path: "#",
-    category: "Web Development",
-    tags: ["Web Development", "Node.js", "Express.js", "ReactJs", "MongoDB"],
-    blogImg: blogCardImg2,
-    description: "Getting Started with MERN Stack!",
-  },
-  {
-    writer: "Sooraj",
-    likes: "10",
-    publishedOn: "June-01",
-    path: "#",
-    category: "Web Development",
-    tags: ["Node.js", "Express.js", "file-upload", "AWS-SDK", "S3"],
-    blogImg: blogCardImg3,
-    description: "Uploading files to AWS S3 using ExpressJS",
-  },
-];
-export const BlogCard = ({
-  writer,
-  likes,
-  publishedOn,
-  path,
-  category,
-  tags,
-  blogImg,
-  description,
-}) => {
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import axios from "axios";
+export const BlogCard = ({ blog }) => {
   return (
     <div className="cards__item">
-      <Link className="cards__item__link" to={path}>
+      <Link className="cards__item__link" to={"/blogs/" + blog.url}>
         <figure
           className="cards__item__pic-wrap"
-          data-category={category}
+          data-category={blog.category}
           style={{ marginRight: 0, marginLeft: 0, marginTop: 0 }}
         >
-          <img className="cards__item__img" alt="Image" src={blogImg} />
+          <LazyLoadImage
+            alt=""
+            src={blog.cardImg}
+            style={{ width: "100%", height: "15rem" }}
+          />
+          {/* <img className="cards__item__img" alt="Image" src={blogImg} /> */}
         </figure>
         <div className="cards__item__info">
           <div className="info-icons">
             <div className=" icon-s">
-              <img className="icon" src={user} />
-              <span className="icon-name">{writer}</span>
+              <img className="icon" src={user} alt="" />
+              <span className="icon-name">{blog.postedBy.name}</span>
             </div>
             <div className=" icon-s">
-              <img className="icon" src={like} />
-              <span className="icon-name">{likes}</span>
+              <img className="icon" src={like} alt="" />
+              <span className="icon-name">{blog.likes || 0}</span>
             </div>
             <div className=" icon-s">
-              <img className="icon" src={calendar} />
-              <span className="icon-name">{publishedOn}</span>
+              <img className="icon" src={calendar} alt="" />
+              <span className="icon-name">
+                {new Date(blog.postedAt).toDateString()}
+              </span>
             </div>
           </div>
-          <h3 className="cards__item__text">{description}</h3>
+          <h3 className="cards__item__text">{blog.title}</h3>
           <div className="tab">
-            {tags.map((tag) => (
+            {blog.tags.map((tag) => (
               <span key={tag} className="round-tab">
                 {tag}
               </span>
@@ -84,7 +49,9 @@ export const BlogCard = ({
           </div>
         </div>
         <div className="button">
-          <button className="default-btn">Read more</button>
+          <button className="default-btn" aria-label="read-complete-blog">
+            Read more
+          </button>
         </div>
       </Link>
     </div>
@@ -95,7 +62,15 @@ const Blogs = (props) => {
     AOS.init();
     AOS.refresh();
   }, []);
-
+  const [blogs, setBlogs] = useState([]);
+  useEffect(() => {
+    axios
+      .get("/api/blogs?state=APPROVED&page=0&limit=3")
+      .then((res) => {
+        setBlogs(res.data.blogs);
+      })
+      .catch((err) => {});
+  }, []);
   return (
     <div
       className="w3l-blog-content blog-section py-5 grey-bg"
@@ -117,16 +92,17 @@ const Blogs = (props) => {
           </h3>
         </div>
         <div className="row blog-cards-container">
-          {blogsData.map((data) => {
+          {blogs.map((blog, index) => {
             return (
               <div
+                key={index}
                 className="col-lg-4 col-md-6 col-sm-12 col-xs-12 blog-card"
                 data-aos="zoom-in"
                 data-aos-delay="100"
                 data-aos-once={true}
                 data-aos-duration="800"
               >
-                <BlogCard {...data} />
+                <BlogCard blog={blog} />
               </div>
             );
           })}

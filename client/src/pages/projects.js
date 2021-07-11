@@ -1,32 +1,37 @@
-import React, { useState, useEffect } from "react";
-import { Project } from "../components/Project/Project";
-import Header from "../components/Project/Header";
-import { GetProjects } from "../components/Project/GetProjects";
-import Nav from "../components/Navbar/Nav";
-import Footer from "../components/Footer/Footer";
+import React, { useState, useEffect, lazy, Suspense } from "react";
+import Loader from "../components/Loader/Loader";
+import "regenerator-runtime/runtime";
+const Project = lazy(() => import("../components/Project/Project"));
+const Header = lazy(() => import("../components/Project/Header"));
+const Nav = lazy(() => import("../components/Navbar/Nav"));
+const Footer = lazy(() => import("../components/Footer/Footer"));
+import GetProjects from "../components/Project/GetProjects";
 function Projectpage() {
-  const [projects, setProjects] = useState([{}]);
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     window.scrollTo(0, 0);
     const fetchData = async () => {
+      setLoading(true);
       let result = await GetProjects();
-      console.log(result);
+      setLoading(false);
       setProjects(result);
     };
     fetchData();
   }, []);
 
   return (
-    <>
+    <Suspense fallback={<Loader />}>
       <Nav />
       <div className="Appdiv">
         <Header />
       </div>
-      {projects.map((dt) => {
-        return <Project data={dt} key={dt.key} />;
+      {projects.map((dt, index) => {
+        return <Project data={dt} key={index} />;
       })}
+      {loading && <Loader />}
       <Footer />
-    </>
+    </Suspense>
   );
 }
 

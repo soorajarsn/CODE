@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, lazy } from "react";
 import { InfoContext } from "../../state/Store";
 import { generateSuccess } from "../../state/info/infoActions";
 import axios from "axios";
-import Tags from "@yaireo/tagify/dist/react.tagify";
+// import Tags from "@yaireo/tagify/dist/react.tagify";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
+const Tags = lazy(() => import("@yaireo/tagify/dist/react.tagify"));
 //
 const whiteList = [
   "OOPs",
@@ -54,7 +55,7 @@ const AskBar = ({
     let parsedValues = [];
     if (values) parsedValues = JSON.parse(values);
     parsedValues = parsedValues.map((tagObj) => tagObj.value);
-    console.log(parsedValues);
+    // console.log(parsedValues);
     setTags(parsedValues);
   };
 
@@ -76,7 +77,7 @@ const AskBar = ({
             "Your doubt has been posted. We'll notify you when someone replies on this."
           )
         );
-        console.log(res.data);
+        // console.log(res.data);
         setPosts(res.data.doubts);
         setTotalItems(res.data.totalItems);
       })
@@ -162,11 +163,8 @@ const AskBar = ({
                     <option value="Operating Systems">Operating Systems</option>
                     <option value="DBMS">DBMS</option>
                     <option value="Web Development">Web Development</option>
-                    <option value="Android Development"></option>
+                    <option value="Android Development">Android Development</option>
                     <option value="ML and AI">ML & AI</option>
-                    <option value="Interview Preparation">
-                      Interview Preparation
-                    </option>
                     <option value="Others">Others</option>
                   </select>
                 </div>

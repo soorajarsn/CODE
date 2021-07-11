@@ -53,7 +53,10 @@ const RegistrationModal = ({ modalOpen, setModalOpen, eventId, setAlert }) => {
       .post(`/post/event/${eventId}/register`, { name, email })
       .then((res) => {
         setRegistering(false);
-        setAlert({ type: "SUCCESS", msg: "Registered successfully!" });
+        setAlert({
+          type: "SUCCESS",
+          msg: "Registered successfully! An Email will be sent to you before the event starts. Check your inbox or spam.",
+        });
         setModalOpen(false);
       })
       .catch((err) => {
@@ -137,7 +140,7 @@ function Event_details(props) {
     axios
       .get(`/api/events/${props.match.params.id}`)
       .then((res) => {
-        console.log(res.data.event);
+        // console.log(res.data.event);
         setLoading(false);
         setEvent(res.data.event);
       })

@@ -59,7 +59,18 @@
   .cardMain > p {
     padding-left: 0;
     color: #111111;
-    font-weight: 600;
+    font-weight: 650;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block; /* Fallback for non-webkit */
+    display: -webkit-box;
+    max-width: 400px;
+    height: 14 * 19 * 1 + "px"; /* Fallback for non-webkit */
+    // margin: 0 auto;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .eventDetails {
     display: flex;
@@ -71,6 +82,9 @@
     display: flex;
     flex-direction: column;
     margin-right: 16px;
+  }
+  .eventInfo b {
+    font-weight: 1000;
   }
   .eventInfo p {
     font-size: 12px;
@@ -90,7 +104,7 @@
     display: block; /* Fallback for non-webkit */
     display: -webkit-box;
     max-width: 400px;
-    height: 14 * 19 * 3 + 'px'; /* Fallback for non-webkit */
+    height: 14 * 19 * 3 + "px"; /* Fallback for non-webkit */
     // margin: 0 auto;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -103,6 +117,8 @@
     margin-top: 0.1rem;
     width: 100%;
     margin-bottom: 0.3rem;
+    max-height: 68px;
+    overflow: hidden;
   }
   .tags {
     height: fit-content;

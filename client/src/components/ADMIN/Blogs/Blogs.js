@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
-import DashboardLayout from "../Dashboard/DashboardLayout";
+import React, { useState, useEffect, useContext, lazy } from "react";
 import {
   Container,
   Modal,
@@ -15,17 +14,22 @@ import {
   DropdownItem,
   DropdownToggle,
 } from "reactstrap";
-import blogRoutes from "./blogRoutes";
-import SuggestionCard from "./SuggestionCard";
-import Pagination from "../../Pagination/Pagination";
-import axios from "axios";
 import { CheckCircle, Cancel } from "@material-ui/icons";
-import Loader from "../../Loader/Loader";
 import { InfoContext } from "../../../state/Store";
 import {
   generateError,
   clearEverything,
 } from "../../../state/info/infoActions";
+import axios from "axios";
+import blogRoutes from "./blogRoutes";
+// import DashboardLayout from "../Dashboard/DashboardLayout";
+const DashboardLayout = lazy(() => import("../Dashboard/DashboardLayout"));
+// import SuggestionCard from "./SuggestionCard";
+// import Pagination from "../../Pagination/Pagination";
+// import Loader from "../../Loader/Loader";
+const SuggestionCard = lazy(() => import("./SuggestionCard"));
+const Pagination = lazy(() => import("../../Pagination/Pagination"));
+const Loader = lazy(() => import("../../Loader/Loader"));
 const typeFilters = [
   { title: "All", value: "All" },
   { title: "Pending", value: "PENDING" },
@@ -216,7 +220,6 @@ const ApproveOrDiscard = ({
   const [discardModalOpen, setDiscardModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const info = useContext(InfoContext);
-  console.log(state);
   useEffect(() => {
     return () => info.dispatch(clearEverything());
   }, []);
@@ -288,7 +291,6 @@ export default (props) => {
     axios
       .get("/api/blogs?" + queryString())
       .then((res) => {
-        console.log(res.data.blogs);
         setBlogs(res.data.blogs);
         setLoading(false);
       })

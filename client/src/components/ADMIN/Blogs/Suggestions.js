@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
-import Pagination from "../../Pagination/Pagination";
+import React, { useState, useEffect, lazy } from "react";
 import {
   Card,
   CardBody,
@@ -10,10 +9,15 @@ import {
 } from "reactstrap";
 import { Container } from "reactstrap";
 import axios from "axios";
-import DashboardLayout from "../Dashboard/DashboardLayout";
+// import DashboardLayout from "../Dashboard/DashboardLayout";
 import blogRoutes from "./blogRoutes";
-import AddSuggestion from "./AddSuggestion";
-import SuggestionCard from "./SuggestionCard";
+// import AddSuggestion from "./AddSuggestion";
+// import Pagination from "../../Pagination/Pagination";
+// import SuggestionCard from "./SuggestionCard";
+const DashboardLayout = lazy(() => import("../Dashboard/DashboardLayout"));
+const AddSuggestion = lazy(() => import("./AddSuggestion"));
+const Pagination = lazy(() => import("../../Pagination/Pagination"));
+const SuggestionCard = lazy(() => import("./SuggestionCard"));
 const typeFilters = [
   { title: "All", value: "All" },
   { title: "Suggested", value: "SUGGESTED" },
@@ -104,7 +108,7 @@ const FilterComponent = ({
     setCurrentFilter(newFilter);
   };
   return (
-    <Card style={{borderRadius:"0"}}>
+    <Card style={{ borderRadius: "0" }}>
       <CardBody
         style={{
           display: "flex",
@@ -149,7 +153,6 @@ const Suggestions = (props) => {
   const [totalItems, setTotalItems] = useState(5);
   //for pagination purpose;
   const handlePageChange = (page) => {
-    console.log(page);
     setCurrentPage(page);
   };
   const queryString = () => {
@@ -168,9 +171,7 @@ const Suggestions = (props) => {
         setSuggestions(res.data.suggestions);
         setTotalItems(res.data.totalItems);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, [currentPage, currentDurationFilters, currentTypeFilters]);
   return (
     <DashboardLayout routes={blogRoutes}>

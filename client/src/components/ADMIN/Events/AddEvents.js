@@ -1,16 +1,19 @@
 import "date-fns";
-import React, { useState, useContext, useEffect } from "react";
-import AddEventsView from "./EventFormView";
+import React, { useState, useContext, useEffect, lazy } from "react";
 import axios from "axios";
 import { InfoContext } from "../../../state/Store";
-import Loader from "../../Loader/Loader";
 import {
   generateError,
   generateWarning,
   generateSuccess,
-  clearEverything
+  clearEverything,
 } from "../../../state/info/infoActions";
+import "regenerator-runtime/runtime";
 import { EditorState, convertToRaw } from "draft-js";
+// import Loader from "../../Loader/Loader";
+// import AddEventsView from "./EventFormView";
+const Loader = lazy(() => import("../../Loader/Loader"));
+const AddEventsView = lazy(() => import("./EventFormView"));
 const AddEvents = (props) => {
   const info = useContext(InfoContext);
   const [eventName, setEventName] = useState("");
@@ -28,12 +31,11 @@ const AddEvents = (props) => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     return () => info.dispatch(clearEverything());
-  },[])
+  }, []);
   const handleTagChange = (values) => {
     let parsedValues = [];
     if (values) parsedValues = JSON.parse(values);
     parsedValues = parsedValues.map((tagObj) => tagObj.value);
-    console.log(parsedValues);
     setTags(parsedValues);
   };
   const handleSubmit = (e) => {
@@ -76,7 +78,10 @@ const AddEvents = (props) => {
     data.append("venue", venue);
     data.append("shortDescription", description);
     data.append("tags", JSON.stringify(tags));
-    data.append("details", JSON.stringify(convertToRaw(editorState.getCurrentContent())));
+    data.append(
+      "details",
+      JSON.stringify(convertToRaw(editorState.getCurrentContent()))
+    );
     setLoading(true);
     axios
       .post("/post/admin/addEvent", data)

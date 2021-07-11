@@ -1,9 +1,10 @@
-import React, { useState, useContext } from "react";
-import Tags from "@yaireo/tagify/dist/react.tagify";
+import React, { useState, useContext,lazy } from "react";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import { InfoContext } from "../../state/Store";
 import { generateError } from "../../state/info/infoActions";
 import axios from "axios";
+// import Tags from "@yaireo/tagify/dist/react.tagify";
+const Tags = lazy(() => import("@yaireo/tagify/dist/react.tagify"));
 const ReplyModal = ({
   setPosts = () => "",
   getQuery = () => "",
@@ -21,7 +22,7 @@ const ReplyModal = ({
     let parsedValues = [];
     if (values) parsedValues = JSON.parse(values);
     parsedValues = parsedValues.map((tagObj) => tagObj.value);
-    console.log(parsedValues);
+    // console.log(parsedValues);
     setTags(parsedValues);
   };
   //reply submit handler

@@ -1,6 +1,10 @@
-@import "~bootstrap/scss/bootstrap"; //styles need to be overwritten
+@import url("aos/dist/aos.css");
+@import url("@yaireo/tagify/dist/tagify.css");
+@import "~bootstrap/scss/bootstrap.scss"; //styles need to be overwritten
 @import "../Dashboard_Profile/paper-dashboard.scss"; //some of the styles need to be overwritten;
 @import url("perfect-scrollbar/css/perfect-scrollbar.css"); //some of the styles need to be overwritten
+@import url("owl.carousel/dist/assets/owl.carousel.css");
+@import url("owl.carousel/dist/assets/owl.theme.default.css");
 @import "../Home/Home.scss"; //some of the styles need to be overwritten
 
 @import "./theme.scss";
@@ -20,7 +24,7 @@
 @import "../../styles/projects";
 // merged css files -- end
 @import "../EventCard/eventCard.scss";
-@import "../Resume/resumeTemplate2.scss";
+// @import "../Resume/resumeTemplate2.scss";
 //merged css files -- start
 @import "../Navbar/nav.scss";
 @import "../Footer/footer.scss";
@@ -30,11 +34,10 @@
 @import "../Dashboard_Profile/demo.scss";
 @import "../Dashboard_Profile/dashboardSidebar.scss";
 @import "../Dashboard_Profile/dashboard.scss";
-@import "../Loader/loader.scss";
 @import "../Navbar/Navbar.scss";
-@import "../Resume/resume.scss";
-@import "../Resume/resumeTemplate1.scss";
-@import "../Resume/resumeTemplate3";
+// @import "../Resume/resume.scss";
+// @import "../Resume/resumeTemplate1.scss";
+// @import "../Resume/resumeTemplate3";
 @import "../Toaster/toaster.scss";
 @import "../Dashboard_Articles/articles.scss";
 @import "../Dashboard_Competitions/competitions.scss";
@@ -67,6 +70,7 @@
 @import "../Project/header.scss";
 @import "../Project/project.scss";
 @import "../Discussion/discussion.scss";
+@import "../JobCards/jobCard.scss";
 //
 //
 // admin pages
@@ -79,3 +83,4 @@
 @import "../ADMIN/Blogs/suggestionCard.scss";
 @import "../ADMIN/Projects/AddProject.scss";
 @import "../ADMIN/Blogs/blogs.scss";
+@import "../ADMIN/Career/career.scss";

@@ -1,5 +1,4 @@
-import React from "react";
-import DashboardLayout from "../Dashboard/DashboardLayout";
+import React, { lazy } from "react";
 import eventRoutes from "./eventRoutes";
 import DateFnsUtils from "@date-io/date-fns";
 import {
@@ -7,8 +6,6 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
-import Tags from "@yaireo/tagify/dist/react.tagify";
-import "@yaireo/tagify/dist/tagify.css";
 import {
   Button,
   Card,
@@ -20,7 +17,12 @@ import {
   Col,
   Form,
 } from "reactstrap";
-import EditorComponent from "../../Editor/Editor";
+// import Tags from "@yaireo/tagify/dist/react.tagify";
+// import DashboardLayout from "../Dashboard/DashboardLayout";
+// import EditorComponent from "../../Editor/Editor";
+const DashboardLayout = lazy(() => import("../Dashboard/DashboardLayout"));
+const Tags = lazy(() => import("@yaireo/tagify/dist/react.tagify"));
+const EditorComponent = lazy(() => import("../../Editor/Editor"));
 const EventFormView = React.forwardRef(
   (
     {

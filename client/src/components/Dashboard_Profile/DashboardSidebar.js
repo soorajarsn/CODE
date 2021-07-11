@@ -1,37 +1,7 @@
 import React, { useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
-import { Nav } from "reactstrap";
+import { NavLink, useLocation } from "react-router-dom";
+import { Nav, Collapse } from "reactstrap";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import { Collapse } from "reactstrap";
-var ps;
-
-const routes = [
-  {
-    path: "/dashboard",
-    name: "EDIT PROFILE",
-    icon: "nc-icon nc-bank",
-  },
-  {
-    path: "/articles",
-    name: "ARTICLES",
-    icon: "nc-icon nc-diamond",
-  },
-  {
-    path: "/user-projects",
-    name: "PROJECTS",
-    icon: "nc-icon nc-pin-3",
-  },
-  {
-    path: "/competitions",
-    name: "COMPETITIONS",
-    icon: "nc-icon nc-bell-55",
-  },
-  {
-    path: "/logout",
-    name: "LOGOUT",
-    icon: "nc-icon nc-tile-56",
-  },
-];
 function Sidebar(props) {
   const sidebar = React.useRef();
   const location = useLocation();
@@ -55,7 +25,7 @@ function Sidebar(props) {
       </div>
       <div className="sidebar-wrapper" ref={sidebar}>
         <Nav>
-          <li className={location.pathname == "/dashboard" && "active"}>
+          <li className={location.pathname == "/dashboard" ? "active" : ""}>
             <NavLink
               to="/dashboard"
               className="btn btn-default "
@@ -68,7 +38,7 @@ function Sidebar(props) {
             <p>ARTICLES</p>
           </li>
           <Collapse isOpen={articleSubmenuOpen}>
-            <li className={location.pathname == "/articles" && "active"}>
+            <li className={location.pathname == "/articles" ? "active" : ""}>
               <NavLink
                 to="/articles"
                 className="btn btn-default "
@@ -77,7 +47,7 @@ function Sidebar(props) {
                 <p>Your Articles</p>
               </NavLink>
             </li>
-            <li className={location.pathname == "/suggestions" && "active"}>
+            <li className={location.pathname == "/suggestions" ? "active" : ""}>
               <NavLink
                 to="/suggestions"
                 className="btn btn-default "
@@ -87,7 +57,7 @@ function Sidebar(props) {
               </NavLink>
             </li>
           </Collapse>
-          <li className={location.pathname == "/user-projects" && "active"}>
+          <li className={location.pathname == "/user-projects" ? "active" : ""}>
             <NavLink
               to="/user-projects"
               className="btn btn-default "
@@ -96,7 +66,7 @@ function Sidebar(props) {
               <p>PROJECTS</p>
             </NavLink>
           </li>
-          <li className={location.pathname == "/competitions" && "active"}>
+          <li className={location.pathname == "/competitions" ? "active" : ""}>
             <NavLink
               to="/competitions"
               className="btn btn-default "
@@ -105,7 +75,7 @@ function Sidebar(props) {
               <p>COMPETITIONS</p>
             </NavLink>
           </li>
-          <li className={location.pathname == "/logout" && "active"}>
+          <li className={location.pathname == "/logout" ? "active" : ""}>
             <NavLink
               to="/logout"
               className="btn btn-default "
