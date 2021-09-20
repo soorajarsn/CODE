@@ -8,15 +8,15 @@ import htmllogo from '../../../public/icons/HTML.svg'
 const miniCard = (title,icon) => {
   let url = slugify(title.toLowerCase(), {remove: /[*+~.()'"!:@//\\?]/g})
   return (
+    <Link to={`/roadmaps/${url}`} className='mini-card-wrapper'>
       <div className='miniCard'>
-        <Link to={`/roadmaps/${url}`}>
           <div className='circleIcon'>
             {!icon && <img src={htmllogo} alt={title}/>}
             {icon && <img src={icon} alt={title}/>}
           </div>
           <div className='titleHolder'>{title}</div>
-        </Link>
-      </div>
+        </div>
+    </Link>
   )
 }
 
