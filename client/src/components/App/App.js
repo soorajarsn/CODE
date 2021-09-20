@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, lazy, Suspense } from "react";
+import React, { useContext, useEffect, useState,lazy, Suspense } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Store, { InfoContext, AuthContext } from "../../state/Store";
 import { loadUser } from "../../state/auth/authActions";
@@ -57,6 +57,7 @@ const WriteArticle = lazy(() => import("../../pages/WriteArticle"));
 const CertificateVerification = lazy(() =>
   import("../../pages/CertificateVerification")
 );
+const UpdateModal = lazy(() => import("../Updates/UpdateModal"));
 const About = lazy(() => import("../../pages/About"));
 const Contact = lazy(() => import("../../pages/Feedback"));
 // const Home = lazy(() => import("../../pages/Home"));
@@ -79,6 +80,7 @@ const Logout = lazy(() => import("../../pages/Logout"));
 function App() {
   const auth = useContext(AuthContext);
   const info = useContext(InfoContext);
+
   useEffect(() => {
     loadUser(auth.dispatch);
   }, []);
@@ -254,9 +256,21 @@ function App() {
   );
 }
 function AppWithStore() {
+  const [updateModelOpen, setUpdateModelOpen] = useState(true);
+  const closeModal = () => {
+    setUpdateModelOpen(false);
+  }
   return (
     <Store>
       <App />
+     {updateModelOpen && 
+      <UpdateModal 
+        modalOpen={updateModelOpen} 
+        closeModal={closeModal} 
+        setModalOpen={setUpdateModelOpen}
+        modalHeader = 'Roadmap Feature'
+        buttonContent = 'Start' 
+        msg='We have added Roadmap feature. Want to take a look?'/>}
     </Store>
   );
 }
