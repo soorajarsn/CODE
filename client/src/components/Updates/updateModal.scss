@@ -1,0 +1,28 @@
+.modal-header {
+  background-color: #EC8C24;
+  text-align: center;
+  color: #fff;
+  border: none;
+  overflow-y: hidden;
+  i {
+    background-color: #fff;
+    color: #EC8C24;
+    padding: 0.5rem;
+    border-radius: 5px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .modal-heading {
+    font-size: 1em;
+    font-weight: 600;
+  }
+  .modal-body {
+    margin: 0;
+    font-size: 0.6em;
+    padding: 0;
+  }
+}
+
+.start-btn {
+  margin:0 auto;
+}

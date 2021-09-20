@@ -28,7 +28,7 @@
   .cardHeader {
     position: relative;
     margin-bottom: 1rem;
-    font-family: "Poppins", sans-serif;
+    font-family: "Nunito", sans-serif;
     font-weight: 500;
     text-transform: capitalize;
   }
@@ -47,7 +47,7 @@
   }
 }
 
-.miniCard {
+.mini-card-wrapper{
   width: 15%;
   height: 12rem;
   min-height: fit-content;
@@ -55,9 +55,9 @@
   padding: 2rem 1rem;
   padding-bottom: 1rem;
   background-color: rgb(225,224,222);
-  font-family: "Poppins", sans-serif;
+  font-family: "Nunito", sans-serif;
   font-weight: 600;
-  font-size: 0.9em;
+  font-size: 0.8em;
   text-align: center;
   text-transform: capitalize;
   border-radius: 18px;
@@ -86,6 +86,6 @@
     box-shadow: 0px 2px 5px #888;
     background-color: rgba($color: #fff, $alpha: 0.2);
     padding: 0.5em 0.6em;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
   }
 }
